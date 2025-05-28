@@ -15,7 +15,7 @@ An interactive simulator for visualizing and detecting spatio-temporal conflicts
 - Easy-to-use **Streamlit web interface**
 
 ## 📁 Project Structure
-
+```text
 ├── app.py # Streamlit app entry point
 ├── data/
 │ └── sample_flights.json # Predefined drone missions
@@ -29,7 +29,7 @@ An interactive simulator for visualizing and detecting spatio-temporal conflicts
 ├── utils.py # Extra utilities (e.g., distance)
 ├── requirements.txt # Python dependencies
 └── README.md # Project overview
-
+```
 
 ## 📦 Installation
 
