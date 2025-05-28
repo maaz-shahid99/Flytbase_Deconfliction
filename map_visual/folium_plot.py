@@ -107,7 +107,7 @@ def plot_flights_on_map(primary, others, conflicts):
             # Other drones get thinner gray lines
             folium.PolyLine(
                 drone['waypoints'], 
-                color="gray", 
+                color="black", 
                 weight=2, 
                 opacity=0.6,
                 popup=f"{drone['id']} Path"
