@@ -1,6 +1,6 @@
 import folium
 from folium.plugins import TimestampedGeoJson
-from drone_logic.temporal import get_positions_over_time
+from drone_logic.drone_utils import get_positions_over_time
 
 def plot_flights_on_map(primary, others, conflicts):
     fmap = folium.Map(location=primary['waypoints'][0], zoom_start=14)
@@ -147,10 +147,24 @@ def plot_flights_on_map(primary, others, conflicts):
         </div>
         """
         
+        # Use a more prominent marker that will show above other markers
         folium.Marker(
             location=(lat, lon),
-            icon=folium.Icon(color="orange", icon="warning-sign"),
-            popup=folium.Popup(popup_html, max_width=300)
+            icon=folium.Icon(color="red", icon="exclamation-sign", prefix="fa"),
+            popup=folium.Popup(popup_html, max_width=300),
+            z_index_offset=1000  # Higher z-index to appear on top
+        ).add_to(fmap)
+        
+        # Add a semi-transparent circle around conflict point for better visibility
+        folium.CircleMarker(
+            location=(lat, lon),
+            radius=15,
+            color="red",
+            weight=3,
+            opacity=0.8,
+            fillColor="yellow",
+            fillOpacity=0.3,
+            z_index_offset=999
         ).add_to(fmap)
 
     # Add only start and end waypoint markers for reference (not all waypoints)
@@ -166,14 +180,32 @@ def plot_flights_on_map(primary, others, conflicts):
         popup=f"Primary END<br>Lat: {primary['waypoints'][-1][0]:.5f}<br>Lon: {primary['waypoints'][-1][1]:.5f}"
     ).add_to(fmap)
 
-    # Enhanced legend with conflict information
+    # Enhanced legend with detailed conflict information
     conflicting_drone_names = ", ".join(sorted(conflicting_drones)) if conflicting_drones else "None"
+    
+    # Build detailed conflict list for legend
+    conflict_details = ""
+    if conflicts.get("unified"):
+        conflict_details = "<p><strong>Active Conflicts:</strong></p>"
+        for conflict in conflicts.get("unified", []):
+            conflict_details += f"""
+            <div style="font-size:10px; margin:2px 0; padding:2px; background:#ffeeee; border-left:3px solid red;">
+                <strong>{conflict['drone']}</strong> at {conflict['time']}<br>
+                📍 3D: {conflict['distance_3d_m']}m
+            </div>
+            """
+    else:
+        conflict_details = "<p style='color:green;'><strong>✅ No Active Conflicts</strong></p>"
+    
+    # Dynamic height based on number of conflicts
+    legend_height = max(200, 180 + len(conflicts.get("unified", [])) * 35)
     
     legend_html = f'''
     <div style="position: fixed; 
-                top: 10px; right: 10px; width: 220px; height: 160px; 
+                top: 10px; right: 10px; width: 250px; height: {legend_height}px; 
                 background-color: white; border:2px solid grey; z-index:9999; 
-                font-size:12px; padding: 10px; box-shadow: 2px 2px 5px rgba(0,0,0,0.3);">
+                font-size:12px; padding: 10px; box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+                overflow-y: auto;">
     <p><strong style="font-size:14px;">🛸 Drone Conflict Map</strong></p>
     <hr style="margin: 5px 0;">
     <p><i class="fa fa-circle" style="color:blue"></i> Primary Drone</p>
@@ -181,8 +213,7 @@ def plot_flights_on_map(primary, others, conflicts):
     <p><i class="fa fa-circle" style="color:red"></i> <strong>Conflict Drones</strong></p>
     <p><i class="fa fa-warning" style="color:orange"></i> Conflict Locations</p>
     <hr style="margin: 5px 0;">
-    <p><strong>Conflicting Drones:</strong><br>
-    <span style="color:red; font-size:10px;">{conflicting_drone_names}</span></p>
+    {conflict_details}
     </div>
     '''
     fmap.get_root().html.add_child(folium.Element(legend_html))
