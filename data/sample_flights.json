@@ -1,0 +1,95 @@
+[
+  {
+    "id": "D1_Northern_Survey",
+    "waypoints": [
+      [18.5350, 73.8400],
+      [18.5380, 73.8500],
+      [18.5304, 73.8667],
+      [18.5280, 73.8800]
+    ],
+    "times": ["14:00", "14:10", "14:15", "14:25"],
+    "altitude": 100,
+    "speed": 15,
+    "mission": "Northern survey route - conflicts at 14:15 (middle waypoint)"
+  },
+  {
+    "id": "D2_Western_Patrol",
+    "waypoints": [
+      [18.5000, 73.8300],
+      [18.5100, 73.8450],
+      [18.5204, 73.8567],
+      [18.5250, 73.8700]
+    ],
+    "times": ["13:55", "14:00", "14:10", "14:20"],
+    "altitude": 95,
+    "speed": 12,
+    "mission": "Western patrol - conflicts at 14:00 (primary start point)"
+  },
+  {
+    "id": "D3_Eastern_Circuit",
+    "waypoints": [
+      [18.5100, 73.8900],
+      [18.5250, 73.8850],
+      [18.5404, 73.8767],
+      [18.5500, 73.8650]
+    ],
+    "times": ["14:05", "14:20", "14:30", "14:40"],
+    "altitude": 105,
+    "speed": 18,
+    "mission": "Eastern circuit - conflicts at 14:30 (primary end point)"
+  },
+  {
+    "id": "D4_Diagonal_Cross",
+    "waypoints": [
+      [18.5450, 73.8350],
+      [18.5350, 73.8550],
+      [18.5250, 73.8650],
+      [18.5150, 73.8850]
+    ],
+    "times": ["14:10", "14:15", "14:20", "14:30"],
+    "altitude": 110,
+    "speed": 20,
+    "mission": "Diagonal crossing - close proximity conflicts at 14:15 and 14:20"
+  },
+  {
+    "id": "D5_Southern_Loop",
+    "waypoints": [
+      [18.5050, 73.8200],
+      [18.5150, 73.8400],
+      [18.5200, 73.8570],
+      [18.5300, 73.8670],
+      [18.5100, 73.8900]
+    ],
+    "times": ["13:50", "14:00", "14:08", "14:16", "14:25"],
+    "altitude": 102,
+    "speed": 16,
+    "mission": "Southern loop - near-miss conflicts at multiple points"
+  },
+  {
+    "id": "D6_Perimeter_Check",
+    "waypoints": [
+      [18.5600, 73.8200],
+      [18.5500, 73.8500],
+      [18.5350, 73.8700],
+      [18.5200, 73.8900]
+    ],
+    "times": ["14:00", "14:12", "14:18", "14:30"],
+    "altitude": 85,
+    "speed": 22,
+    "mission": "Wide perimeter check - altitude separation conflicts"
+  },
+  {
+    "id": "D7_Intersecting_Figure8",
+    "waypoints": [
+      [18.5450, 73.8650],
+      [18.5320, 73.8680],
+      [18.5280, 73.8620],
+      [18.5350, 73.8580],
+      [18.5400, 73.8650]
+    ],
+    "times": ["14:12", "14:15", "14:18", "14:22", "14:28"],
+    "altitude": 98,
+    "speed": 14,
+    "mission": "Figure-8 pattern - intersection conflicts with primary"
+  }
+]
