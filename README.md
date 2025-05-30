@@ -2,6 +2,8 @@
 
 An interactive simulator for visualizing and detecting spatio-temporal conflicts between autonomous drones based on flight paths, times, and altitudes.
 
+![](static\Screenshot.png)
+
 ## 🚀 Features
 
 - Upload or define a **primary drone mission**
